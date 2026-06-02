@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP Quote Translator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            resize: none;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #edf2f7;
+            border-radius: 6px;
+        }
+        .radio-group label {
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button {
+            width: 100%;
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #2b6cb0;
+        }
+        .results-box {
+            margin-top: 30px;
+            border-top: 2px solid #edf2f7;
+            padding-top: 20px;
+        }
+        .result-item {
+            background: #f7fafc;
+            padding: 15px;
+            border-left: 4px solid #3182ce;
+            border-radius: 4px;
+        }
+        .lang-title {
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 5px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .translated-text {
+            font-size: 18px;
+            color: #1a202c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Quote Translator</h1>
+    
+    <form method="POST">
+        <textarea name="quote" placeholder="Enter your English quote here..." required>{{ quote }}</textarea>
+        
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="language" value="Marathi" required {% if selected_lang == 'Marathi' %}checked{% endif %}>
+                Marathi
+            </label>
+            <label>
+                <input type="radio" name="language" value="Hindi" {% if selected_lang == 'Hindi' %}checked{% endif %}>
+                Hindi
+            </label>
+            <label>
+                <input type="radio" name="language" value="Sanskrit" {% if selected_lang == 'Sanskrit' %}checked{% endif %}>
+                Sanskrit
+            </label>
+        </div>
+
+        <button type="submit">Translate Quote</button>
+    </form>
+
+    {% if translated_text %}
+    <div class="results-box">
+        <h3>Translation Result:</h3>
+        <div class="result-item">
+            <div class="lang-title">{{ selected_lang }}</div>
+            <div class="translated-text">{{ translated_text }}</div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
